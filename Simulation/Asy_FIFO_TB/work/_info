@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dE:/DE1-SoC/FPGA/Syn_FIFO/Simulation/Syn_FIFO_TB
+vAsy_FIFO
+!s110 1572873862
+!i10b 1
+!s100 HXF=oaGAj4N>Ib=53;>?n1
+IOlci]kHBcRfK<:ThTQzS:1
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dE:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB
+w1572871837
+8E:/DE1-SoC/FPGA/Asy_FIFO/RTL/Asy_FIFO.v
+FE:/DE1-SoC/FPGA/Asy_FIFO/RTL/Asy_FIFO.v
+L0 16
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z3 !s108 1572873861.000000
+!s107 E:/DE1-SoC/FPGA/Asy_FIFO/RTL/Asy_FIFO.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/DE1-SoC/FPGA/Asy_FIFO/RTL/Asy_FIFO.v|
+!i113 1
+Z4 o-work work
+Z5 tCvgOpt 0
+n@asy_@f@i@f@o
+vAsy_FIFO_TB
+!s110 1572873861
+!i10b 1
+!s100 og9AzNehcf06W;lhN>glm3
+I9R5IA?5lEG[c54<HzoXS21
+R0
+R1
+w1572866855
+8E:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v
+FE:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v
+L0 3
+R2
+r1
+!s85 0
+31
+R3
+!s107 E:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v|
+!s90 -reportprogress|300|-work|work|-stats=none|E:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v|
+!i113 1
+R4
+R5
+n@asy_@f@i@f@o_@t@b

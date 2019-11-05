@@ -1,0 +1,16 @@
+Fitter Status : Successful - Tue Nov 05 14:31:16 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : Asy_FIFO
+Top-level Entity Name : Asy_FIFO
+Family : Cyclone IV E
+Device : EP4CE10F17C8
+Timing Models : Final
+Total logic elements : 67 / 10,320 ( < 1 % )
+    Total combinational functions : 47 / 10,320 ( < 1 % )
+    Dedicated logic registers : 56 / 10,320 ( < 1 % )
+Total registers : 56
+Total pins : 23 / 180 ( 13 % )
+Total virtual pins : 0
+Total memory bits : 2,048 / 423,936 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

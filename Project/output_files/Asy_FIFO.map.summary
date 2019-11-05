@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Nov 05 14:31:11 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : Asy_FIFO
+Top-level Entity Name : Asy_FIFO
+Family : Cyclone IV E
+Total logic elements : 71
+    Total combinational functions : 47
+    Dedicated logic registers : 56
+Total registers : 56
+Total pins : 23
+Total virtual pins : 0
+Total memory bits : 2,048
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
