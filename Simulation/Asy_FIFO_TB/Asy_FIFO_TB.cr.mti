@@ -1,8 +1,0 @@
-E:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v {1 {vlog -work work -stats=none E:/DE1-SoC/FPGA/Asy_FIFO/Simulation/Asy_FIFO_TB/Asy_FIFO_TB.v
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module Asy_FIFO_TB
-
-Top level modules:
-	Asy_FIFO_TB
-
-} {} {}}
