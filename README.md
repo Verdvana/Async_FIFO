@@ -17,3 +17,6 @@
 
 * v2.1：添加信号 `2021.08.07`
    * 添加写应答和有效信号。
+
+### Wavaform：
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/master/tb/wave.png)
