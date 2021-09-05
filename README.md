@@ -19,4 +19,4 @@
    * 添加写应答和有效信号。
 
 ### Wavaform：
-![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/master/tb/wave.png)
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/master/simulation/data/wave.png)
