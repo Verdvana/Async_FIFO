@@ -9,8 +9,9 @@
 //-----------------------------------------------------------------------------
 //
 // Version 	Design		Coding		Simulata	  Review		Rel data
-// V1.0		Verdvana	Verdvana	Verdvana		  			2019-06-22
+// V1.0		Verdvana	Verdvana	Verdvana		  			2019-11-05
 // V2.0		Verdvana	Verdvana	Verdvana		  			2021-08-07
+// V2.1		Verdvana	Verdvana	Verdvana		  			2021-08-07
 //
 //-----------------------------------------------------------------------------
 //
@@ -18,6 +19,7 @@
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
 // V2.0		Standardize the interface and refactored code,
 //			Add read&write count and almost assertion.
+// V2.1		Add Write acknowledge and Valid flag
 //
 //=============================================================================
 
@@ -42,16 +44,18 @@ module Async_FIFO #(
 	input									rd_clk,			//Read clock
 	input									rst_n,			//Async reset					
 	// Write interface
-	input									write,			//Write enable
-	input		 [DATA_WIDTH-1:0]			wdata,	    	//Write data
+	input									wr_en,			//Write enable
+	input		 [DATA_WIDTH-1:0]			din,	    	//Write data
 	// Read interface
-	input									read,			//Read enable
-	output logic [DATA_WIDTH-1:0]			rdata,	    	//Read data
+	input									rd_en,			//Read enable
+	output logic [DATA_WIDTH-1:0]			dout,	    	//Read data
 	// Status	
-	output logic							full,			//Full sign
-	output logic							empty, 			//Empty sign
-	output logic							almost_full,	//Full sign
-	output logic							almost_empty, 	//Empty sign
+	output logic							full,			//Full flag
+	output logic							empty, 			//Empty flag
+	output logic							almost_full,	//Almost full flag
+	output logic							almost_empty, 	//Almost empty flag
+	output logic							wr_ack,			//Write acknowledge
+	output logic							valid,			//Valid flag
 	output logic [clogb2(FIFO_DEPTH-1):0]	wr_count,     	//Write count
 	output logic [clogb2(FIFO_DEPTH-1):0]	rd_count     	//Read count
 );
@@ -110,9 +114,24 @@ module Async_FIFO #(
 	assign	almost_full		= wr_count >= (FIFO_DEPTH - ALMOST_WR); 
 	assign	almost_empty	= rd_count <  (ALMOST_RD + 1);
 
+	always_ff@(posedge wr_clk, negedge rst_n)begin
+		if(!rst_n)begin
+			wr_ack	<= #TCO '0;
+		end
+		else if(!wr_mask)begin
+			wr_ack 	<= #TCO wr_en;
+		end
+		else begin
+			wr_ack	<= #TCO '0;
+		end
+	end
+
+	assign	valid	= ~empty;
+
+
 	//=========================================================
 	// Write side
-	assign	wr_mask	= ~ (write & (~full));
+	assign	wr_mask	= ~ (wr_en & (~full));
 
 	always_ff@(posedge wr_clk, negedge rst_n)begin
 		if(!rst_n)begin
@@ -144,7 +163,7 @@ module Async_FIFO #(
 
 	//=========================================================
 	// Read side
-	assign  rd_mask = ~(read & (~empty));
+	assign  rd_mask = ~(rd_en & (~empty));
 
 	always_ff@(posedge rd_clk, negedge rst_n)begin
 		if(!rst_n)begin
@@ -179,7 +198,7 @@ module Async_FIFO #(
 	`ifdef FPGA_EMU
 	always_ff@(posedge wr_clk)begin
 		if(!wr_mask)
-			mem[wr_addr] <= #TCO wdata;
+			mem[wr_addr] <= #TCO din;
 	end
 	`else
     always_ff@(posedge wr_clk, negedge rst_n)begin
@@ -189,11 +208,11 @@ module Async_FIFO #(
 			end
 		end
 		else if(!wr_mask) begin
-			mem[wr_addr]	<= #TCO wdata;
+			mem[wr_addr]	<= #TCO din;
 		end
 	end
 	`endif
 
-    assign  rdata   = mem[rd_addr];
+    assign  dout	= mem[rd_addr];
 	
 endmodule
