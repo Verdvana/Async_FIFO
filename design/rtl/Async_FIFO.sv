@@ -17,7 +17,7 @@
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
 // V2.0		Standardize the interface and refactored code,
-//			Add read-write count and almost assertion.
+//			Add read&write count and almost assertion.
 //
 //=============================================================================
 
