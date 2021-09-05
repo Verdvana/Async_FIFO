@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------
 //
 // Version 	Design		Coding		Simulata	  Review		Rel data
-// V1.0		Verdvana	Verdvana	Verdvana		  			2019-06-22
+// V1.0		Verdvana	Verdvana	Verdvana		  			2019-11-05
 // V2.0		Verdvana	Verdvana	Verdvana		  			2021-08-07
 //
 //-----------------------------------------------------------------------------
@@ -42,11 +42,11 @@ module Async_FIFO #(
 	input									rd_clk,			//Read clock
 	input									rst_n,			//Async reset					
 	// Write interface
-	input									write,			//Write enable
-	input		 [DATA_WIDTH-1:0]			wdata,	    	//Write data
+	input									wr_en,			//Write enable
+	input		 [DATA_WIDTH-1:0]			din,	    	//Write data
 	// Read interface
-	input									read,			//Read enable
-	output logic [DATA_WIDTH-1:0]			rdata,	    	//Read data
+	input									rd_en,			//Read enable
+	output logic [DATA_WIDTH-1:0]			dout,	    	//Read data
 	// Status	
 	output logic							full,			//Full sign
 	output logic							empty, 			//Empty sign
@@ -112,7 +112,7 @@ module Async_FIFO #(
 
 	//=========================================================
 	// Write side
-	assign	wr_mask	= ~ (write & (~full));
+	assign	wr_mask	= ~ (wr_en & (~full));
 
 	always_ff@(posedge wr_clk, negedge rst_n)begin
 		if(!rst_n)begin
@@ -144,7 +144,7 @@ module Async_FIFO #(
 
 	//=========================================================
 	// Read side
-	assign  rd_mask = ~(read & (~empty));
+	assign  rd_mask = ~(rd_en & (~empty));
 
 	always_ff@(posedge rd_clk, negedge rst_n)begin
 		if(!rst_n)begin
@@ -179,7 +179,7 @@ module Async_FIFO #(
 	`ifdef FPGA_EMU
 	always_ff@(posedge wr_clk)begin
 		if(!wr_mask)
-			mem[wr_addr] <= #TCO wdata;
+			mem[wr_addr] <= #TCO din;
 	end
 	`else
     always_ff@(posedge wr_clk, negedge rst_n)begin
@@ -189,11 +189,11 @@ module Async_FIFO #(
 			end
 		end
 		else if(!wr_mask) begin
-			mem[wr_addr]	<= #TCO wdata;
+			mem[wr_addr]	<= #TCO din;
 		end
 	end
 	`endif
 
-    assign  rdata   = mem[rd_addr];
+    assign  dout	= mem[rd_addr];
 	
 endmodule

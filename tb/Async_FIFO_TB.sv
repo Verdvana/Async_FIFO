@@ -49,10 +49,10 @@ module Async_FIFO_TB;
     logic 									wr_clk;
     logic 									rd_clk;
     logic 									rst_n;
-    logic 									write;
-    logic 		 [DATA_WIDTH-1:0]			wdata;
-    logic 									read;
-    logic   [DATA_WIDTH-1:0]				rdata;
+    logic 									wr_en;
+    logic 		 [DATA_WIDTH-1:0]			din;
+    logic 									rd_en;
+    logic   [DATA_WIDTH-1:0]				dout;
     logic  									full;
     logic  									empty;
 	logic									almost_full;	//Full sign
@@ -109,9 +109,9 @@ module Async_FIFO_TB;
     //=========================================================
     // Task init
     task task_init;
-        write    = '0;
-        wdata    = '0;
-        read    = '0;
+        wr_en    = '0;
+        din    = '0;
+        rd_en    = '0;
         #6660;
         #TIN;
     endtask
@@ -119,16 +119,16 @@ module Async_FIFO_TB;
     //=========================================================
     // Task write & read
     task task_wr(logic [DATA_WIDTH-1:0]          data_in);
-        write   = '1;
-        wdata = data_in;
+        wr_en   = '1;
+        din = data_in;
         #PERIOD_0;
-        write   = '0;
+        wr_en   = '0;
     endtask
 
     task task_rd;
-        read   = '1;
+        rd_en   = '1;
         #PERIOD_1;
-        read   = '0;
+        rd_en   = '0;
     endtask
 
     //=========================================================
