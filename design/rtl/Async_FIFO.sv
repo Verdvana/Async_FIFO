@@ -23,20 +23,21 @@
 //
 //=============================================================================
 
+
+
 //The time unit and precision of the external declaration
 timeunit        1ns;
 timeprecision   1ps;
-
 
 // Define
 //`define			FPGA_EMU
 
 //Module
 module Async_FIFO #(
-	parameter		DATA_WIDTH	= 8,		//Data width
-					FIFO_DEPTH	= 16,		//FIFO depth
-					ALMOST_WR	= 2,		//Almost full asserted advance value
-					ALMOST_RD	= 2			//Almost empty asserted advance value
+	parameter		DATA_WIDTH	= 8,						//Data width
+					FIFO_DEPTH	= 16,						//FIFO depth
+					ALMOST_WR	= 2,						//Almost full asserted advance value
+					ALMOST_RD	= 2							//Almost empty asserted advance value
 
 )(
 	// Clock and reset
