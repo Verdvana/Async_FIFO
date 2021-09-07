@@ -1,26 +1,20 @@
 //=============================================================================
-//
 // Module Name:						Async_FIFO
 // Function Description:			Asynchronous FIFO
 // Department:						Qualcomm (Shanghai) Co., Ltd.
 // Author:							Verdvana
 // Email:							verdvana@outlook.com
-//
 //-----------------------------------------------------------------------------
-//
 // Version 	Design		Coding		Simulata	  Review		Rel data
 // V1.0		Verdvana	Verdvana	Verdvana		  			2019-11-05
 // V2.0		Verdvana	Verdvana	Verdvana		  			2021-08-07
 // V2.1		Verdvana	Verdvana	Verdvana		  			2021-08-07
-//
 //-----------------------------------------------------------------------------
-//
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
 // V2.0		Standardize the interface and refactored code,
 //			Add read&write count and almost assertion.
 // V2.1		Add Write acknowledge and Valid flag
-//
 //=============================================================================
 
 
