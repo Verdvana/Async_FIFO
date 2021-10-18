@@ -1,21 +1,23 @@
-//=============================================================================
+//============================================================================================
 // Module Name:						Async_FIFO
-// Function Description:			Asynchronous FIFO
+// Function Description:				Asynchronous FIFO
 // Department:						Qualcomm (Shanghai) Co., Ltd.
-// Author:							Verdvana
-// Email:							verdvana@outlook.com
-//-----------------------------------------------------------------------------
-// Version 	Design		Coding		Simulata	  Review		Rel data
-// V1.0		Verdvana	Verdvana	Verdvana		  			2019-11-05
-// V2.0		Verdvana	Verdvana	Verdvana		  			2021-08-07
-// V2.1		Verdvana	Verdvana	Verdvana		  			2021-08-07
-//-----------------------------------------------------------------------------
+// Author:						Verdvana
+// Email:						verdvana@outlook.com
+//--------------------------------------------------------------------------------------------
+// Version 	Design		Coding		Simulata	Review		Rel data
+// V1.0		Verdvana	Verdvana	Verdvana		  	2019-11-05
+// V2.0		Verdvana	Verdvana	Verdvana		  	2021-08-07
+// V2.1		Verdvana	Verdvana	Verdvana		  	2021-08-07
+//--------------------------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
 // V2.0		Standardize the interface and refactored code,
-//			Add read&write count and almost assertion.
+//		Add read&write count and almost assertion.
 // V2.1		Add Write acknowledge and Valid flag
-//=============================================================================
+// V2.2		Use the logarithmic system function in SystemVerilog 
+//		instead of self-built function
+//============================================================================================
 
 
 
@@ -28,65 +30,56 @@ timeprecision   1ps;
 
 //Module
 module Async_FIFO #(
-	parameter		DATA_WIDTH	= 8,						//Data width
-					FIFO_DEPTH	= 16,						//FIFO depth
-					ALMOST_WR	= 2,						//Almost full asserted advance value
-					ALMOST_RD	= 2							//Almost empty asserted advance value
+	parameter		DATA_WIDTH	= 8,		//Data width
+				FIFO_DEPTH	= 16,		//FIFO depth
+				ALMOST_WR	= 2,		//Almost full asserted advance value
+				ALMOST_RD	= 2		//Almost empty asserted advance value
 
 )(
 	// Clock and reset
-	input									wr_clk,			//Write clock
-	input									rd_clk,			//Read clock
-	input									rst_n,			//Async reset					
+	input					wr_clk,		//Write clock
+	input					rd_clk,		//Read clock
+	input					rst_n,		//Async reset					
 	// Write interface
-	input									wr_en,			//Write enable
-	input		 [DATA_WIDTH-1:0]			din,	    	//Write data
+	input					wr_en,		//Write enable
+	input		 [DATA_WIDTH-1:0]	din,	    	//Write data
 	// Read interface
-	input									rd_en,			//Read enable
-	output logic [DATA_WIDTH-1:0]			dout,	    	//Read data
+	input					rd_en,		//Read enable
+	output logic [DATA_WIDTH-1:0]		dout,	    	//Read data
 	// Status	
-	output logic							full,			//Full flag
-	output logic							empty, 			//Empty flag
-	output logic							almost_full,	//Almost full flag
-	output logic							almost_empty, 	//Almost empty flag
-	output logic							wr_ack,			//Write acknowledge
-	output logic							valid,			//Valid flag
-	output logic [clogb2(FIFO_DEPTH-1):0]	wr_count,     	//Write count
-	output logic [clogb2(FIFO_DEPTH-1):0]	rd_count     	//Read count
+	output logic				full,		//Full flag
+	output logic				empty, 		//Empty flag
+	output logic				almost_full,	//Almost full flag
+	output logic				almost_empty, 	//Almost empty flag
+	output logic				wr_ack,		//Write acknowledge
+	output logic				valid,		//Valid flag
+	output logic [$clog2(FIFO_DEPTH-1):0]	wr_count,     	//Write count
+	output logic [$clog2(FIFO_DEPTH-1):0]	rd_count     	//Read count
 );
-
-	//=========================================================
-	// Bit width calculation function
-	function integer clogb2 (input integer depth);
-	begin
-		for (clogb2=0; depth>0; clogb2=clogb2+1) 
-			depth = depth >>1;                          
-	end
-	endfunction
 
 
 	//=========================================================
 	// Parameter
-	localparam		TCO			= 1.6,
-					ADDR_WIDTH	= clogb2(FIFO_DEPTH-1);
+	localparam		TCO		= 1.6,
+				ADDR_WIDTH	= $clog2(FIFO_DEPTH-1);
 
 	//=========================================================
 	//Signal
-	reg 	[DATA_WIDTH-1:0]	mem [FIFO_DEPTH];   //Memory bank
+	reg 	[DATA_WIDTH-1:0]	mem [FIFO_DEPTH];   	//Memory bank
 
-	logic	[ADDR_WIDTH-1:0] 	wr_addr;			//Write address
-	logic  	[ADDR_WIDTH-1:0] 	rd_addr;			//Read address
-	logic	[ADDR_WIDTH:0] 		wr_ptr;				//Write pointer
-	logic  	[ADDR_WIDTH:0] 		rd_ptr;				//Read pointer
+	logic	[ADDR_WIDTH-1:0] 	wr_addr;		//Write address
+	logic  	[ADDR_WIDTH-1:0] 	rd_addr;		//Read address
+	logic	[ADDR_WIDTH:0] 		wr_ptr;			//Write pointer
+	logic  	[ADDR_WIDTH:0] 		rd_ptr;			//Read pointer
 	logic	[ADDR_WIDTH:0] 		wr_ptr_gray;		//Write pointer gray
 	logic  	[ADDR_WIDTH:0] 		rd_ptr_gray;		//Read pointer gray
 	logic	[ADDR_WIDTH:0] 		wr_ptr_gray_ff [2];	//Write pointer gray register
 	logic  	[ADDR_WIDTH:0] 		rd_ptr_gray_ff [2];	//Read pointer gray register
-	logic	[ADDR_WIDTH:0] 		wr_ptr_bin;			//Write pointer in reed domian
-	logic  	[ADDR_WIDTH:0] 		rd_ptr_bin;			//Read pointer in write domian
+	logic	[ADDR_WIDTH:0] 		wr_ptr_bin;		//Write pointer in reed domian
+	logic  	[ADDR_WIDTH:0] 		rd_ptr_bin;		//Read pointer in write domian
 
-	logic                       wr_mask;            //Write mask
-	logic                       rd_mask;            //Read mask
+	logic                       wr_mask;            	//Write mask
+	logic                       rd_mask;            	//Read mask
 
 
 	//=========================================================
