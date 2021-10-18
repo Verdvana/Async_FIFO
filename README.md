@@ -19,7 +19,7 @@
    * 添加写应答和有效信号。
  
 * v2.2: 函数替换 `2021.10.18`
-   * 使用SystemVerilog中的求对数系统函数代替自建函数
+   * 使用SystemVerilog中的求对数系统函数代替自建函数。
 
 ### Wavaform：
 ![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/master/simulation/data/wave.png)
