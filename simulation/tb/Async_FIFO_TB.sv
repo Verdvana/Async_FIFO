@@ -7,9 +7,12 @@
 //-----------------------------------------------------------------------------
 // Version 	Design		Coding		Simulata	  Review		Rel data
 // V1.0		Verdvana	Verdvana	Verdvana		  			2021-08-28
+// V1.1		Verdvana	Verdvana	Verdvana		  			2021-10-18
 //-----------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO TestBench.
+// V1.1		Use the logarithmic system function in SystemVerilog 
+//		instead of self-built function
 //=============================================================================
 
 
@@ -54,18 +57,9 @@ module Async_FIFO_TB;
 	logic									almost_empty; 	//Empty sign
 	logic									wr_ack;
 	logic									valid;
-	logic	[clogb2(FIFO_DEPTH-1):0]		wr_count;
-	logic	[clogb2(FIFO_DEPTH-1):0]		rd_count;
+	logic	[$clog2(FIFO_DEPTH-1):0]		wr_count;
+	logic	[$clog2(FIFO_DEPTH-1):0]		rd_count;
 
-
-	//=========================================================
-	// Bit width calculation function
-	function integer clogb2 (input integer depth);
-	begin
-		for (clogb2=0; depth>0; clogb2=clogb2+1) 
-			depth = depth >>1;                          
-	end
-	endfunction
 
 	//=========================================================
 	// Instantiate
