@@ -9,6 +9,7 @@
 // V1.0		Verdvana	Verdvana	Verdvana		  	2019-11-05
 // V2.0		Verdvana	Verdvana	Verdvana		  	2021-08-07
 // V2.1		Verdvana	Verdvana	Verdvana		  	2021-08-07
+// V2.2		Verdvana	Verdvana	Verdvana		  	2021-10-18
 //--------------------------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
