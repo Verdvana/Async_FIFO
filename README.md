@@ -21,5 +21,17 @@
 * v2.2: 函数替换 `2021.10.18`
    * 使用SystemVerilog中的求对数系统函数代替自建函数。
 
+* v3.0: 读写位宽不同设计 `2022.01.04`
+   * 允许读写位宽不同；
+   * 读数据位宽必须为写数据位宽的1/1、1/2、1/4、1/8等等。
+
+* v2.1: 读模式可配置 `2022.01.10`
+   * 原本读模式为FWFT，现更新标准读模式，并可根据define设置两种模式。
+
 ### Wavaform：
-![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/master/simulation/data/wave.png)
+
+* Standard read mode:
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/v3.1/simulation/data/standard.jpg)
+
+* FWFT read mode:
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/v3.1/simulation/data/FWFT.jpg)
