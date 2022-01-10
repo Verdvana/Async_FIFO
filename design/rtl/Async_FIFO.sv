@@ -1,86 +1,101 @@
-//============================================================================================
+//=============================================================================
 // Module Name:						Async_FIFO
-// Function Description:				Asynchronous FIFO
+// Function Description:			Asynchronous FIFO
 // Department:						Qualcomm (Shanghai) Co., Ltd.
-// Author:						Verdvana
-// Email:						verdvana@outlook.com
-//--------------------------------------------------------------------------------------------
+// Author:							Verdvana
+// Email:							verdvana@outlook.com
+//-----------------------------------------------------------------------------
 // Version 	Design		Coding		Simulata	Review		Rel data
-// V1.0		Verdvana	Verdvana	Verdvana		  	2019-11-05
-// V2.0		Verdvana	Verdvana	Verdvana		  	2021-08-07
-// V2.1		Verdvana	Verdvana	Verdvana		  	2021-08-07
-// V2.2		Verdvana	Verdvana	Verdvana		  	2021-10-18
-//--------------------------------------------------------------------------------------------
+// V1.0		Verdvana	Verdvana	Verdvana				2019-11-05
+// V2.0		Verdvana	Verdvana	Verdvana				2021-08-07
+// V2.1		Verdvana	Verdvana	Verdvana				2021-08-07
+// V2.2		Verdvana	Verdvana	Verdvana				2021-10-18
+// V3.0		Verdvana	Verdvana	Verdvana				2022-01-04
+// V3.1		Verdvana	Verdvana	Verdvana				2022-01-10
+//-----------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
 // V2.0		Standardize the interface and refactored code,
-//		Add read&write count and almost assertion.
-// V2.1		Add Write acknowledge and Valid flag
+//			Add read&write count and almost assertion.
+// V2.1		Add Write acknowledge and Valid flag.
 // V2.2		Use the logarithmic system function in SystemVerilog 
-//		instead of self-built function
-//============================================================================================
+//			instead of self-built function.
+// V3.0		The write data width is allowed to be different from the read 
+//			data width;
+//			But the read data width must be 1, 1/2, 1/4, 1/8, etc. of the 
+//			write data width.
+// V3.1		Originally defaulted to FWFT read mode, after the update, 
+//			standard read mode and FWFT read mode are optional by define.
+//=============================================================================
 
-
-
-//The time unit and precision of the external declaration
-timeunit        1ns;
-timeprecision   1ps;
+// Include
 
 // Define
-//`define			FPGA_EMU
+//`define				FPGA_EMU
+`define				STANDARD
+//`define				FWFT
 
 //Module
 module Async_FIFO #(
-	parameter		DATA_WIDTH	= 8,		//Data width
-				FIFO_DEPTH	= 16,		//FIFO depth
-				ALMOST_WR	= 2,		//Almost full asserted advance value
-				ALMOST_RD	= 2		//Almost empty asserted advance value
+	parameter		WRITE_WIDTH		= 64,					// Data width
+					READ_WIDTH		= 32,					// Data width
+					WRITE_DEPTH		= 8,					// FIFO depth
+					ALMOST_WR		= 2,					// Almost full asserted advance value
+					ALMOST_RD		= 2						// Almost empty asserted advance value
 
 )(
 	// Clock and reset
-	input					wr_clk,		//Write clock
-	input					rd_clk,		//Read clock
-	input					rst_n,		//Async reset					
+	input									wr_clk,			// Write clock
+	input									rd_clk,			// Read clock
+	input									rst_n,			// Async reset					
 	// Write interface
-	input					wr_en,		//Write enable
-	input		 [DATA_WIDTH-1:0]	din,	    	//Write data
+	input									wr_en,			// Write enable
+	input		 [WRITE_WIDTH-1:0]			din,			// Write data
 	// Read interface
-	input					rd_en,		//Read enable
-	output logic [DATA_WIDTH-1:0]		dout,	    	//Read data
+	input									rd_en,			// Read enable
+	output logic [READ_WIDTH-1:0]			dout,			// Read data
 	// Status	
-	output logic				full,		//Full flag
-	output logic				empty, 		//Empty flag
-	output logic				almost_full,	//Almost full flag
-	output logic				almost_empty, 	//Almost empty flag
-	output logic				wr_ack,		//Write acknowledge
-	output logic				valid,		//Valid flag
-	output logic [$clog2(FIFO_DEPTH-1):0]	wr_count,     	//Write count
-	output logic [$clog2(FIFO_DEPTH-1):0]	rd_count     	//Read count
+	output logic							full,			// Full flag
+	output logic							empty,			// Empty flag
+	output logic							almost_full,	// Almost full flag
+	output logic							almost_empty,	// Almost empty flag
+	output logic							wr_ack,			// Write valid
+	output logic							valid,			// Read valid
+	output logic [$clog2(WRITE_DEPTH-1):0]	wr_count,		// Write count
+	output logic [$clog2(WRITE_DEPTH-1):0]	rd_count		// Read count
 );
-
+	//=========================================================================
+	// The time unit and precision of the internal declaration
+	timeunit		1ns;
+	timeprecision	1ps;
 
 	//=========================================================
 	// Parameter
-	localparam		TCO		= 1.6,
-				ADDR_WIDTH	= $clog2(FIFO_DEPTH-1);
+	localparam		TCO			= 1.6,						// Simulate the delay of the register
+					ADDR_WIDTH	= $clog2(WRITE_DEPTH-1),	// Address width
+					MULTIPLE	= 2**($clog2(WRITE_WIDTH)-$clog2(READ_WIDTH));	// The write data width is a multiple of the read data width
+
 
 	//=========================================================
 	//Signal
-	reg 	[DATA_WIDTH-1:0]	mem [FIFO_DEPTH];   	//Memory bank
+	reg 	[WRITE_WIDTH-1:0]		mem [WRITE_DEPTH];		// Memory bank
 
-	logic	[ADDR_WIDTH-1:0] 	wr_addr;		//Write address
-	logic  	[ADDR_WIDTH-1:0] 	rd_addr;		//Read address
-	logic	[ADDR_WIDTH:0] 		wr_ptr;			//Write pointer
-	logic  	[ADDR_WIDTH:0] 		rd_ptr;			//Read pointer
-	logic	[ADDR_WIDTH:0] 		wr_ptr_gray;		//Write pointer gray
-	logic  	[ADDR_WIDTH:0] 		rd_ptr_gray;		//Read pointer gray
-	logic	[ADDR_WIDTH:0] 		wr_ptr_gray_ff [2];	//Write pointer gray register
-	logic  	[ADDR_WIDTH:0] 		rd_ptr_gray_ff [2];	//Read pointer gray register
-	logic	[ADDR_WIDTH:0] 		wr_ptr_bin;		//Write pointer in reed domian
-	logic  	[ADDR_WIDTH:0] 		rd_ptr_bin;		//Read pointer in write domian
+	logic	[ADDR_WIDTH-1:0]		wr_addr;				// Write address
+	logic  	[ADDR_WIDTH-1:0]		rd_addr;				// Read address
+	logic	[ADDR_WIDTH:0]			wr_ptr;					// Write pointer
+	logic  	[ADDR_WIDTH:0]			rd_ptr;					// Read pointer
+	logic	[ADDR_WIDTH:0]			wr_ptr_gray;			// Write pointer gray
+	logic  	[ADDR_WIDTH:0]			rd_ptr_gray;			// Read pointer gray
+	logic	[ADDR_WIDTH:0]			wr_ptr_gray_ff [2];		// Write pointer gray register
+	logic  	[ADDR_WIDTH:0]			rd_ptr_gray_ff [2];		// Read pointer gray register
+	logic	[ADDR_WIDTH:0]			wr_ptr_bin;				// Write pointer in reed domian
+	logic  	[ADDR_WIDTH:0]			rd_ptr_bin;				// Read pointer in write domian
 
-	logic                       wr_mask;            	//Write mask
-	logic                       rd_mask;            	//Read mask
+	logic							wr_mask;				// Write mask
+	logic							rd_mask;				// Read mask
+
+
+	logic	[$clog2(MULTIPLE):0]	cnt_mul;				// Multiplier Counter
 
 
 	//=========================================================
@@ -100,7 +115,7 @@ module Async_FIFO #(
 	assign	wr_count 		= wr_ptr - rd_ptr_bin;
 	assign	rd_count 		= wr_ptr_bin - rd_ptr;
 
-	assign	almost_full		= wr_count >= (FIFO_DEPTH - ALMOST_WR); 
+	assign	almost_full		= wr_count >= (WRITE_DEPTH - ALMOST_WR); 
 	assign	almost_empty	= rd_count <  (ALMOST_RD + 1);
 
 	always_ff@(posedge wr_clk, negedge rst_n)begin
@@ -115,7 +130,18 @@ module Async_FIFO #(
 		end
 	end
 
+	`ifdef	FWFT
 	assign	valid	= ~empty;
+	`elsif	STANDARD
+	always_ff@(posedge rd_clk)begin
+		if(empty)
+			valid	<= #TCO '0;
+		else if(rd_en)
+			valid	<= #TCO '1;
+		else
+			valid	<= #TCO '0;
+	end
+	`endif
 
 
 	//=========================================================
@@ -156,9 +182,18 @@ module Async_FIFO #(
 
 	always_ff@(posedge rd_clk, negedge rst_n)begin
 		if(!rst_n)begin
-			rd_ptr	<= #TCO '0;
+			cnt_mul	<= #TCO 1;
 		end
 		else if(!rd_mask)begin
+			cnt_mul	<= #TCO cnt_mul + 2'b10;
+		end
+    end
+
+	always_ff@(posedge rd_clk, negedge rst_n)begin
+		if(!rst_n)begin
+			rd_ptr	<= #TCO '0;
+		end
+		else if(!rd_mask && &cnt_mul)begin
 			rd_ptr	<= #TCO rd_ptr + 1'b1;
 		end
 	end
@@ -192,7 +227,7 @@ module Async_FIFO #(
 	`else
     always_ff@(posedge wr_clk, negedge rst_n)begin
 		if(!rst_n)begin
-			for(int i=0;i<FIFO_DEPTH;i++)begin
+			for(int i=0;i<WRITE_DEPTH;i++)begin
 				mem[i]	<= #TCO '0;
 			end
 		end
@@ -202,6 +237,15 @@ module Async_FIFO #(
 	end
 	`endif
 
-    assign  dout	= mem[rd_addr];
+	`ifdef	FWFT
+	assign  dout	= mem[rd_addr][((cnt_mul>>1)*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+	`elsif	STANDARD
+	always_ff@(posedge rd_clk)begin
+		if(!empty)
+			dout	<= #TCO mem[rd_addr][((cnt_mul>>1)*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+		else
+			dout	<= #TCO 'z;
+	end
+	`endif
 	
 endmodule
