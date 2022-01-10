@@ -1,0 +1,405 @@
+#######################################################################################
+# log primitive debug message of FSDB dumping                                         #
+# This is for R&D to analyze when there are issues happening when FSDB dump           #
+#######################################################################################
+ANF: vcsd_get_serial_mode_status('./../com/Async_FIFO: undefined symbol: vcsd_get_serial_mode_status')
+ANF: vcsd_enable_sva_success_callback('./../com/Async_FIFO: undefined symbol: vcsd_enable_sva_success_callback')
+ANF: vcsd_disable_sva_success_callback('./../com/Async_FIFO: undefined symbol: vcsd_disable_sva_success_callback')
+ANF: vcsd_get_power_scope_name('./../com/Async_FIFO: undefined symbol: vcsd_get_power_scope_name')
+ANF: vcsd_begin_no_value_var_info('./../com/Async_FIFO: undefined symbol: vcsd_begin_no_value_var_info')
+ANF: vcsd_end_no_value_var_info('./../com/Async_FIFO: undefined symbol: vcsd_end_no_value_var_info')
+ANF: vcsd_remove_xprop_merge_mode_callback('./../com/Async_FIFO: undefined symbol: vcsd_remove_xprop_merge_mode_callback')
+ANF: vhpi_get_cb_info('./../com/Async_FIFO: undefined symbol: vhpi_get_cb_info')
+ANF: vhpi_free_handle('./../com/Async_FIFO: undefined symbol: vhpi_free_handle')
+ANF: vhpi_fetch_vcsd_handle('./../com/Async_FIFO: undefined symbol: vhpi_fetch_vcsd_handle')
+ANF: vhpi_fetch_vpi_handle('./../com/Async_FIFO: undefined symbol: vhpi_fetch_vpi_handle')
+ANF: vhpi_has_verilog_parent('./../com/Async_FIFO: undefined symbol: vhpi_has_verilog_parent')
+ANF: vhpi_is_verilog_scope('./../com/Async_FIFO: undefined symbol: vhpi_is_verilog_scope')
+ANF: scsd_xprop_is_enabled('./../com/Async_FIFO: undefined symbol: scsd_xprop_is_enabled')
+ANF: scsd_xprop_sig_is_promoted('./../com/Async_FIFO: undefined symbol: scsd_xprop_sig_is_promoted')
+ANF: scsd_xprop_int_xvalue('./../com/Async_FIFO: undefined symbol: scsd_xprop_int_xvalue')
+ANF: scsd_xprop_bool_xvalue('./../com/Async_FIFO: undefined symbol: scsd_xprop_bool_xvalue')
+ANF: scsd_xprop_enum_xvalue('./../com/Async_FIFO: undefined symbol: scsd_xprop_enum_xvalue')
+ANF: scsd_xprop_register_merge_mode_cb('./../com/Async_FIFO: undefined symbol: scsd_xprop_register_merge_mode_cb')
+ANF: scsd_xprop_delete_merge_mode_cb('./../com/Async_FIFO: undefined symbol: scsd_xprop_delete_merge_mode_cb')
+ANF: scsd_xprop_get_merge_mode('./../com/Async_FIFO: undefined symbol: scsd_xprop_get_merge_mode')
+ANF: scsd_thread_get_info('./../com/Async_FIFO: undefined symbol: scsd_thread_get_info')
+ANF: scsd_thread_vc_init('./../com/Async_FIFO: undefined symbol: scsd_thread_vc_init')
+ANF: scsd_master_set_delta_sync_cbk('./../com/Async_FIFO: undefined symbol: scsd_master_set_delta_sync_cbk')
+ANF: scsd_fgp_get_fsdb_cores('./../com/Async_FIFO: undefined symbol: scsd_fgp_get_fsdb_cores')
+ANF: msvEnableDumpingMode('./../com/Async_FIFO: undefined symbol: msvEnableDumpingMode')
+ANF: msvGetVersion('./../com/Async_FIFO: undefined symbol: msvGetVersion')
+ANF: msvGetInstProp('./../com/Async_FIFO: undefined symbol: msvGetInstProp')
+ANF: msvIsSpiceEngineReady('./../com/Async_FIFO: undefined symbol: msvIsSpiceEngineReady')
+ANF: msvSetAddProbeCallback('./../com/Async_FIFO: undefined symbol: msvSetAddProbeCallback')
+ANF: msvGetInstHandle('./../com/Async_FIFO: undefined symbol: msvGetInstHandle')
+ANF: msvGetProbeByInst('./../com/Async_FIFO: undefined symbol: msvGetProbeByInst')
+ANF: msvGetSigHandle('./../com/Async_FIFO: undefined symbol: msvGetSigHandle')
+ANF: msvGetProbeBySig('./../com/Async_FIFO: undefined symbol: msvGetProbeBySig')
+ANF: msvGetProbeInfo('./../com/Async_FIFO: undefined symbol: msvGetProbeInfo')
+ANF: msvRelease('./../com/Async_FIFO: undefined symbol: msvRelease')
+ANF: msvSetVcCallbackFunc('./../com/Async_FIFO: undefined symbol: msvSetVcCallbackFunc')
+ANF: msvCheckVcCallback('./../com/Async_FIFO: undefined symbol: msvCheckVcCallback')
+ANF: msvAddVcCallback('./../com/Async_FIFO: undefined symbol: msvAddVcCallback')
+ANF: msvRemoveVcCallback('./../com/Async_FIFO: undefined symbol: msvRemoveVcCallback')
+ANF: msvGetLatestValue('./../com/Async_FIFO: undefined symbol: msvGetLatestValue')
+ANF: msvSetEndofSimCallback('./../com/Async_FIFO: undefined symbol: msvSetEndofSimCallback')
+ANF: msvIgnoredProbe('./../com/Async_FIFO: undefined symbol: msvIgnoredProbe')
+ANF: msvGetThruNetInfo('./../com/Async_FIFO: undefined symbol: msvGetThruNetInfo')
+ANF: msvFreeThruNetInfo('./../com/Async_FIFO: undefined symbol: msvFreeThruNetInfo')
+ANF: PI_ace_get_output_time_unit('./../com/Async_FIFO: undefined symbol: PI_ace_get_output_time_unit')
+ANF: PI_ace_sim_sync('./../com/Async_FIFO: undefined symbol: PI_ace_sim_sync')
+ANF: msvGetRereadInitFile('./../com/Async_FIFO: undefined symbol: msvGetRereadInitFile')
+ANF: msvSetBeforeRereadCallback('./../com/Async_FIFO: undefined symbol: msvSetBeforeRereadCallback')
+ANF: msvSetAfterRereadCallback('./../com/Async_FIFO: undefined symbol: msvSetAfterRereadCallback')
+ANF: msvSetForceCallback('./../com/Async_FIFO: undefined symbol: msvSetForceCallback')
+ANF: msvSetReleaseCallback('./../com/Async_FIFO: undefined symbol: msvSetReleaseCallback')
+ANF: msvGetForceStatus('./../com/Async_FIFO: undefined symbol: msvGetForceStatus')
+ANF: vhdi_dt_get_type('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_type')
+ANF: vhdi_dt_get_key('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_key')
+ANF: vhdi_dt_get_vhdl_enum_info('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_vhdl_enum_info')
+ANF: vhdi_dt_get_vhdl_physical_info('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_vhdl_physical_info')
+ANF: vhdi_dt_get_vhdl_array_info('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_vhdl_array_info')
+ANF: vhdi_dt_get_vhdl_record_info('./../com/Async_FIFO: undefined symbol: vhdi_dt_get_vhdl_record_info')
+ANF: vhdi_def_traverse_module('./../com/Async_FIFO: undefined symbol: vhdi_def_traverse_module')
+ANF: vhdi_def_traverse_scope('./../com/Async_FIFO: undefined symbol: vhdi_def_traverse_scope')
+ANF: vhdi_def_traverse_variable('./../com/Async_FIFO: undefined symbol: vhdi_def_traverse_variable')
+ANF: vhdi_def_get_module_id_by_vhpi('./../com/Async_FIFO: undefined symbol: vhdi_def_get_module_id_by_vhpi')
+ANF: vhdi_def_get_handle_by_module_id('./../com/Async_FIFO: undefined symbol: vhdi_def_get_handle_by_module_id')
+ANF: vhdi_def_get_variable_info_by_vhpi('./../com/Async_FIFO: undefined symbol: vhdi_def_get_variable_info_by_vhpi')
+ANF: vhdi_def_free('./../com/Async_FIFO: undefined symbol: vhdi_def_free')
+ANF: vhdi_ist_traverse_scope('./../com/Async_FIFO: undefined symbol: vhdi_ist_traverse_scope')
+ANF: vhdi_ist_traverse_variable('./../com/Async_FIFO: undefined symbol: vhdi_ist_traverse_variable')
+ANF: vhdi_ist_convert_by_vhpi('./../com/Async_FIFO: undefined symbol: vhdi_ist_convert_by_vhpi')
+ANF: vhdi_ist_clone('./../com/Async_FIFO: undefined symbol: vhdi_ist_clone')
+ANF: vhdi_ist_free('./../com/Async_FIFO: undefined symbol: vhdi_ist_free')
+ANF: vhdi_ist_hash_key('./../com/Async_FIFO: undefined symbol: vhdi_ist_hash_key')
+ANF: vhdi_ist_compare('./../com/Async_FIFO: undefined symbol: vhdi_ist_compare')
+ANF: vhdi_ist_get_value_addr('./../com/Async_FIFO: undefined symbol: vhdi_ist_get_value_addr')
+ANF: vhdi_set_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_set_scsd_callback')
+ANF: vhdi_cbk_set_force_callback('./../com/Async_FIFO: undefined symbol: vhdi_cbk_set_force_callback')
+ANF: vhdi_trigger_init_force('./../com/Async_FIFO: undefined symbol: vhdi_trigger_init_force')
+ANF: vhdi_ist_check_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_ist_check_scsd_callback')
+ANF: vhdi_ist_add_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_ist_add_scsd_callback')
+ANF: vhdi_ist_remove_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_ist_remove_scsd_callback')
+ANF: vhdi_ist_get_scsd_user_data('./../com/Async_FIFO: undefined symbol: vhdi_ist_get_scsd_user_data')
+ANF: vhdi_add_time_change_callback('./../com/Async_FIFO: undefined symbol: vhdi_add_time_change_callback')
+ANF: vhdi_get_real_value_by_value_addr('./../com/Async_FIFO: undefined symbol: vhdi_get_real_value_by_value_addr')
+ANF: vhdi_get_64_value_by_value_addr('./../com/Async_FIFO: undefined symbol: vhdi_get_64_value_by_value_addr')
+ANF: vhdi_xprop_inst_is_promoted('./../com/Async_FIFO: undefined symbol: vhdi_xprop_inst_is_promoted')
+ANF: vdi_ist_convert_by_vhdi('./../com/Async_FIFO: undefined symbol: vdi_ist_convert_by_vhdi')
+ANF: vhdi_ist_get_module_id('./../com/Async_FIFO: undefined symbol: vhdi_ist_get_module_id')
+ANF: vhdi_refine_foreign_scope_type('./../com/Async_FIFO: undefined symbol: vhdi_refine_foreign_scope_type')
+ANF: vhdi_flush_callback('./../com/Async_FIFO: undefined symbol: vhdi_flush_callback')
+ANF: vhdi_set_orig_name('./../com/Async_FIFO: undefined symbol: vhdi_set_orig_name')
+ANF: vhdi_set_dump_pt('./../com/Async_FIFO: undefined symbol: vhdi_set_dump_pt')
+ANF: vhdi_get_fsdb_option('./../com/Async_FIFO: undefined symbol: vhdi_get_fsdb_option')
+ANF: vhdi_fgp_get_mode('./../com/Async_FIFO: undefined symbol: vhdi_fgp_get_mode')
+ANF: vhdi_node_register_composite_var('./../com/Async_FIFO: undefined symbol: vhdi_node_register_composite_var')
+ANF: vhdi_node_analysis('./../com/Async_FIFO: undefined symbol: vhdi_node_analysis')
+ANF: vhdi_node_id('./../com/Async_FIFO: undefined symbol: vhdi_node_id')
+ANF: vhdi_node_ist_check_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_node_ist_check_scsd_callback')
+ANF: vhdi_node_ist_add_scsd_callback('./../com/Async_FIFO: undefined symbol: vhdi_node_ist_add_scsd_callback')
+ANF: vhdi_node_ist_get_value_addr('./../com/Async_FIFO: undefined symbol: vhdi_node_ist_get_value_addr')
+VCS compile option:
+ option[0]: ./../com/Async_FIFO
+ option[1]: +v2k
+ option[2]: +vc
+ option[3]: +notimingcheck
+ option[4]: +nospecify
+ option[5]: +vcs+flush+all
+ option[6]: -cm_runsilent
+ option[7]: -cm
+ option[8]: line+cond+fsm+branch+tgl
+ option[9]: -cm_name
+ option[10]: Async_FIFO
+ option[11]: -cm_dir
+ option[12]: ./../cm/Async_FIFO.vdb
+ option[13]: +define+VCS_SIM
+ option[14]: +vpdfile+./../sim/Async_FIFO.vpd
+ option[15]: -a
+ option[16]: ./../com/compile.log
+ option[17]: /usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/bin/vcs1
+ option[18]: -Mcc=gcc
+ option[19]: -Mcplusplus=g++
+ option[20]: -Masflags=
+ option[21]: -Mcfl= -pipe -fPIC -O -I/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/include 
+ option[22]: -Mxcflags= -pipe -fPIC -I/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/include
+ option[23]: -Mldflags= -rdynamic -Wl,-E 
+ option[24]: -Mout=./../com/Async_FIFO
+ option[25]: -Mamsrun=
+ option[26]: -Mvcsaceobjs=
+ option[27]: -Mobjects= /usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/libvirsim.so /usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/liberrorinf.so /usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/libsnpsmalloc.so /usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/libvfs.so 
+ option[28]: -Mexternalobj=
+ option[29]: -Msaverestoreobj=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/vcs_save_restore_new.o
+ option[30]: -Mcrt0=
+ option[31]: -Mcrtn=
+ option[32]: -Mcsrc=
+ option[33]: -Msyslibs=/usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/share/PLI/VCS/LINUX64/pli.a -ldl 
+ option[34]: -l
+ option[35]: ./../com/compile.log
+ option[36]: -Xvcs_run_simv=1
+ option[37]: -full64
+ option[38]: +v2k
+ option[39]: +vc
+ option[40]: -timescale=1ns/1ps
+ option[41]: -debug_acc+all
+ option[42]: +vpi
+ option[43]: +vcsd1
+ option[44]: +itf+/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib/vcsdp_lite.tab
+ option[45]: +notimingcheck
+ option[46]: +nospecify
+ option[47]: +vcs+flush+all
+ option[48]: -cm
+ option[49]: line+cond+fsm+branch+tgl
+ option[50]: -cm_name
+ option[51]: Async_FIFO
+ option[52]: -cm_dir
+ option[53]: ./../cm/Async_FIFO.vdb
+ option[54]: -cm_log
+ option[55]: ./../cm/cm.log
+ option[56]: +define+VCS_SIM
+ option[57]: -o
+ option[58]: ./../com/Async_FIFO
+ option[59]: -fsdb
+ option[60]: -P
+ option[61]: /usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/share/PLI/VCS/LINUX64/verdi.tab
+ option[62]: -picarchive
+ option[63]: -debug_acc+fsdb
+ option[64]: -sverilog
+ option[65]: +rad
+ option[66]: -gen_obj
+ option[67]: -f
+ option[68]: filelist.f
+ option[69]: -load
+ option[70]: /usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/share/PLI/VCS/LINUX64/libnovas.so:FSDBDumpCmd
+ option[71]: timescale=1ns/1ps
+Chronologic Simulation VCS Release O-2018.09-SP2_Full64
+Linux 5.3.18-57-default #1 SMP Wed Apr 28 10:54:41 UTC 2021 (ba3c2e9) x86_64
+CPU cores: 8
+Limit information:
+======================================
+cputime		unlimited
+filesize		unlimited
+datasize		unlimited
+stacksize		8192 kbytes
+coredumpsize		unlimited
+memoryuse		unlimited
+vmemoryuse		unlimited
+descriptors		524288
+memorylocked		64 kbytes
+maxproc		31604
+======================================
+(Special)Runtime environment variables:
+
+Runtime environment variables:
+UNAME=/bin/uname
+VCS_LOG_FILE=./../com/compile.log
+LC_ALL=C
+KDE_FULL_SESSION=true
+LS_COLORS=no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.xz=00;31:*.avi=01;35:*.bmp=01;35:*.dl=01;35:*.fli=01;35:*.gif=01;35:*.gl=01;35:*.jpg=01;35:*.jpeg=01;35:*.mkv=01;35:*.mng=01;35:*.mov=01;35:*.mp4=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.svg=01;35:*.tga=01;35:*.tif=01;35:*.webm=01;35:*.webp=01;35:*.wmv=01;35:*.xbm=01;35:*.xcf=01;35:*.xpm=01;35:*.aiff=00;32:*.ape=00;32:*.au=00;32:*.flac=00;32:*.m4a=00;32:*.mid=00;32:*.mp3=00;32:*.mpc=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:*.wma=00;32:*.wv=00;32:
+LD_LIBRARY_PATH=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/lib:/usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/share/PLI/VCS/LINUX64
+CSHRCREAD=true
+HOSTTYPE=x86_64-linux
+DVE_HOME=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/gui/dve
+XAUTHLOCALHOSTNAME=localhost
+LESSCLOSE=lessclose.sh %s %s
+XKEYSYMDB=/usr/X11R6/lib/X11/XKeysymDB
+LANG=en_US.UTF-8
+WINDOWMANAGER=/usr/bin/startplasma-x11
+LESS=-M -I -R
+PROFILEHOME=
+DISPLAY=:0
+JAVA_ROOT=/usr/lib64/jvm/jre-11-openjdk
+HOSTNAME=localhost
+SCRNAME=vcs
+OLDPWD=/home/verdvana/Project/IC/Project/Async_FIFO/simulation/com/Async_FIFO.daidir/debug_dump/fsearch
+SHELL_SESSION_ID=40ecce3271684396bea7fa1a677e58f2
+CONFIG_SITE=/usr/share/site/x86_64-unknown-linux-gnu
+CSHEDIT=emacs
+AUDIODRIVER=pulseaudio
+GTK2_MODULES=unity-gtk-module
+GPG_TTY=/dev/pts/1
+LESS_ADVANCED_PREPROCESSOR=no
+TOOL_HOME=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64
+COLORTERM=truecolor
+SYNOPSYS_HOME=/usr/software/synopsys/syn2018/syn/O-2018.06-SP5-5
+MAKE_TERMOUT=/dev/pts/1
+QT_SCREEN_SCALE_FACTORS=Virtual1=1.5;Virtual2=1.5;Virtual3=1.5;Virtual4=1.5;Virtual5=1.5;Virtual6=1.5;Virtual7=1.5;Virtual8=1.5;
+OVA_UUM=0
+JAVA_HOME=/usr/lib64/jvm/jre-11-openjdk
+VENDOR=unknown
+MACHTYPE=x86_64
+XDG_VTNR=7
+GTK3_MODULES=unity-gtk-module
+SSH_AUTH_SOCK=/tmp/ssh-4NSSZhRGgqe6/agent.1633
+QEMU_AUDIO_DRV=pa
+MFLAGS=
+VCS_MODE_FLAG=64
+MINICOM=-c on
+QT_SYSTEM_DIR=/usr/share/desktop-data
+OSTYPE=linux
+XDG_SESSION_ID=1
+USER=verdvana
+PAGER=less
+DESKTOP_SESSION=/usr/share/xsessions/default
+synopsys=/usr/software/synopsys/
+KONSOLE_VERSION=200402
+MORE=/bin/more
+GROUP=users
+PWD=/home/verdvana/Project/IC/Project/Async_FIFO/simulation/work
+VMR_MODE_FLAG=64
+SSH_ASKPASS=/usr/lib/ssh/ssh-askpass
+HOME=/home/verdvana
+SSH_AGENT_PID=1671
+HOST=localhost.localdomain
+XNLSPATH=/usr/share/X11/nls
+XDG_SESSION_TYPE=x11
+VCS_ARG_ADDED_FOR_TMP=1
+prj=/home/verdvana/Project/
+XDG_DATA_DIRS=/usr/local/share:/usr/share
+SCL_HOME=/usr/software/synopsys/scl2018/scl/2018.06
+KONSOLE_DBUS_SESSION=/Sessions/1
+XDG_SESSION_DESKTOP=KDE
+PT_HOME=/usr/software/synopsys/pt2018/pts/O-2018.06-SP1
+KONSOLE_DBUS_WINDOW=/Windows/1
+GTK_MODULES=canberra-gtk-module
+FROM_HEADER=
+MAIL=/var/spool/mail/verdvana
+UBUNTU_MENUPROXY=1
+LESSKEY=/etc/lesskey.bin
+SHELL=/bin/tcsh
+TERM=xterm
+KONSOLE_DBUS_SERVICE=:1.36
+XDG_SESSION_CLASS=user
+SCRIPT_NAME=vcs
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+QT_IM_MODULE=xim
+XMODIFIERS=@im=local
+LM_LICENSE_FILE=27000@localhost.localdomain
+SNPS_VCS_TMPDIR=/tmp/vcs_20220110075046_6165
+XCURSOR_THEME=breeze_cursors
+LS_OPTIONS=-N --color=tty -T 0
+XDG_CURRENT_DESKTOP=KDE
+MAKELEVEL=1
+VERDI_HOME=/usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11
+PYTHONSTARTUP=/etc/pythonstart
+XDG_SEAT=seat0
+SHLVL=4
+COLORFGBG=15;0
+LANGUAGE=
+VCS_COM=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/linux64/bin/vcs1
+G_FILENAME_ENCODING=@locale,UTF-8,ISO-8859-15,CP1252
+MAKE_TERMERR=/dev/pts/1
+VCS_ARCH=linux64
+MANPATH=/usr/local/man:/usr/local/share/man:/usr/share/man
+VCS_DEPTH=0
+WINDOWID=8388615
+XSESSION_IS_UP=yes
+LOGNAME=verdvana
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+XDG_RUNTIME_DIR=/run/user/1000
+XAUTHORITY=/home/verdvana/.Xauthority
+JRE_HOME=/usr/lib64/jvm/jre-11-openjdk
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+QT_AUTO_SCREEN_SCALE_FACTOR=0
+XDG_CONFIG_DIRS=/etc/xdg
+PATH=.:/home/verdvana/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/gui/dve/bin:/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/bin:/usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/bin:/usr/software/synopsys/syn2018/syn/O-2018.06-SP5-5/bin:/usr/software/synopsys/pt2018/pts/O-2018.06-SP1/bin:/usr/software/synopsys/lc2018/lc/O-2018.06-SP5-1/linux64/lc/bin:/usr/software/synopsys/scl2018/scl/2018.06/linux64/bin:/usr/software/synopsys/scl2018/scl/2018.06/linux64/bin:/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/gui/dve/bin:/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/bin:/usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/bin:/usr/software/synopsys/syn2018/syn/O-2018.06-SP5-5/bin:/usr/software/synopsys/pt2018/pts/O-2018.06-SP1/bin:/usr/software/synopsys/lc2018/lc/O-2018.06-SP5-1/linux64/lc/bin:/usr/software/synopsys/scl2018/scl/2018.06/linux64/bin
+JAVA_BINDIR=/usr/lib64/jvm/jre-11-openjdk/bin
+VCS_HOME=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2
+KDE_SESSION_UID=1000
+KDE_SESSION_VERSION=5
+SDL_AUDIODRIVER=pulse
+KDED_STARTED_BY_KDEINIT=1
+sysc_uni_pwd=/home/verdvana/Project/IC/Project/Async_FIFO/simulation/work
+G_BROKEN_FILENAMES=1
+QT_IM_SWITCHER=imsw-multi
+MAKEFLAGS=
+CPU=x86_64
+CVS_RSH=ssh
+mc=/home/verdvana/Library/Memory/
+LESSOPEN=lessopen.sh %s
+LC_HOME=/usr/software/synopsys/lc2018/lc/O-2018.06-SP5-1
+GTK_IM_MODULE=cedilla
+_=./../com/Async_FIFO
+VCS_HEAP_EXEC=true
+VCS_PATHMAP_PRELOAD_DONE=1
+VCS_EXEC_DONE=1
+DVE=/usr/software/synopsys/vcs2018/vcs/O-2018.09-SP2/gui/dve
+SPECMAN_OUTPUT_TO_TTY=1
+Runtime command line arguments:
+argv[0]=./../com/Async_FIFO
+argv[1]=+v2k
+argv[2]=+vc
+argv[3]=+notimingcheck
+argv[4]=+nospecify
+argv[5]=+vcs+flush+all
+argv[6]=-cm_runsilent
+argv[7]=-cm
+argv[8]=line+cond+fsm+branch+tgl
+argv[9]=-cm_name
+argv[10]=Async_FIFO
+argv[11]=-cm_dir
+argv[12]=./../cm/Async_FIFO.vdb
+argv[13]=+define+VCS_SIM
+argv[14]=+vpdfile+./../sim/Async_FIFO.vpd
+argv[15]=-a
+argv[16]=./../com/compile.log
+347 profile - 100
+          CPU/Mem usage: 0.020 sys,  0.140 user,  287.29M mem
+348 Mon Jan 10 15:50:48 2022
+349 pliAppInit
+350 FSDB_GATE is set.
+351 FSDB_RTL is set.
+352 Enable Parallel Dumping.
+353 pliAppMiscSet: New Sim Round
+354 pliEntryInit
+355 LIBSSCORE=found /usr/software/synopsys/verdi2018/verdi/O-2018.09-SP2-11/share/PLI/lib/LINUXAMD64/libsscore_vcs201809.so through $NOVAS_HOME setting.
+356 FSDB Dumper for VCS, Release Verdi_O-2018.09-SP2-11, Linux x86_64/64bit, 02/05/2020
+357 (C) 1996 - 2020 by Synopsys, Inc.
+358 sps_call_fsdbDumpfile_main at 0 : ./../../design/tb/Async_FIFO_TB.sv(228)
+359 argv[0]: (./../../simulation/sim/Async_FIFO.fsdb)
+360 *Verdi* : Create FSDB file './../../simulation/sim/Async_FIFO.fsdb'
+361 compile option from '/home/verdvana/Project/IC/Project/Async_FIFO/simulation/com/Async_FIFO.daidir/vcs_rebuild'.
+362   "vcs '-full64' '-R' '-sverilog' '+v2k' '+vc' '-timescale=1ns/1ps' '+rad' '-debug_acc+all' '+notimingcheck' '+nospecify' '+vcs+flush+all' '-cm' 'line+cond+fsm+branch+tgl' '-cm_name' 'Async_FIFO' '-cm_dir' './../cm/Async_FIFO.vdb' '-cm_log' './../cm/cm.log' '+define+VCS_SIM' '+vpdfile+./../sim/Async_FIFO.vpd' '-o' './../com/Async_FIFO' '-l' './../com/compile.log' '-fsdb' '-f' 'filelist.f' 2>&1"
+363 FSDB_VCS_ENABLE_FAST_VC is enable
+364 sps_call_fsdbDumpvars_vd_main at 0 : ./../../design/tb/Async_FIFO_TB.sv(229)
+365 argv[0]: (+all)
+366 [spi_vcs_vd_ppi_create_root]: no upf option
+367 FSDB dumper cannot dump UPF related power signal ($power_tree): no ppiPowerNetwork.
+368 *Verdi* : Begin traversing the scopes, layer (0).
+369 *Verdi* : Enable +all dumping.
+370 *Verdi* : End of traversing.
+371 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.020 sys,  0.150 user,  381.81M mem
+                   incr: 0.000 sys,  0.010 user,  6.99M mem
+                   accu: 0.000 sys,  0.010 user,  6.99M mem
+              accu incr: 0.000 sys,  0.010 user,  6.99M mem
+
+          Count usage: 53 var,  53 idcode,  18 callback
+                 incr: 53 var,  53 idcode,  18 callback
+                 accu: 53 var,  53 idcode,  18 callback
+            accu incr: 53 var,  53 idcode,  18 callback
+372 Mon Jan 10 15:50:48 2022
+373 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.020 sys,  0.150 user,  382.87M mem
+                   incr: 0.000 sys,  0.000 user,  1.05M mem
+                   accu: 0.000 sys,  0.010 user,  8.04M mem
+              accu incr: 0.000 sys,  0.000 user,  1.05M mem
+
+          Count usage: 53 var,  53 idcode,  18 callback
+                 incr: 0 var,  0 idcode,  0 callback
+                 accu: 53 var,  53 idcode,  18 callback
+            accu incr: 0 var,  0 idcode,  0 callback
+374 Mon Jan 10 15:50:48 2022
+375 End of simulation at 18382000
+376 Mon Jan 10 15:50:48 2022
+377 Begin FSDB profile info:
+378 FSDB Writer : bc1(655) bcn(467) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.007397) io wait(0.000000) theadpool wait(0.000000) target functin(0.000000)
+FSDB Writer cpu time : MT Compression : 0
+379 End FSDB profile info
+380 Parallel profile    -  Flush:3 Expand:0 ProduceWait:0 ConsumerWait:0 BlockUsed:0
+381                        ProduceTime:0.191877304 ConsumerTime:0.000000000 Buffer:64MB
+382 SimExit
+383 Sim process exit
