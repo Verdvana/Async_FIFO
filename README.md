@@ -29,4 +29,9 @@
    * 原本读模式为FWFT，现更新标准读模式，并可根据define设置两种模式。
 
 ### Wavaform：
-![wave]()
+
+* Standard read mode:
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/v3.1/simulation/data/standard.jpg)
+
+* FWFT read mode:
+![wave](https://raw.githubusercontent.com/Verdvana/Async_FIFO/v3.1/simulation/data/FWFT.jpg)
