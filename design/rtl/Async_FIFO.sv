@@ -8,7 +8,7 @@
 //
 //-----------------------------------------------------------------------------
 //
-// Version 	Design		Coding		Simulata	  Review		Rel data
+// Version 	Design		Coding		Simulate	  Review		Rel date
 // V1.0		Verdvana	Verdvana	Verdvana		  			2019-11-05
 // V2.0		Verdvana	Verdvana	Verdvana		  			2021-08-07
 // V2.1		Verdvana	Verdvana	Verdvana		  			2021-08-07
