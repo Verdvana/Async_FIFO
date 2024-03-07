@@ -12,6 +12,7 @@
 // V2.2		Verdvana	Verdvana	Verdvana				2021-10-18
 // V3.0		Verdvana	Verdvana	Verdvana				2022-01-04
 // V3.1		Verdvana	Verdvana	Verdvana				2022-01-10
+// V3.2		Verdvana	Verdvana	Verdvana				2024-02-29
 //-----------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
@@ -26,14 +27,13 @@
 //			write data width.
 // V3.1		Originally defaulted to FWFT read mode, after the update, 
 //			standard read mode and FWFT read mode are optional by define.
+// V3.2		Change the selection of FWFT to parameter way instead of by define.
 //=============================================================================
 
 // Include
 
 // Define
 //`define				FPGA_EMU
-`define				STANDARD
-//`define				FWFT
 
 //Module
 module Async_FIFO #(
@@ -130,18 +130,19 @@ module Async_FIFO #(
 		end
 	end
 
-	`ifdef	FWFT
-	assign	valid	= ~empty;
-	`elsif	STANDARD
-	always_ff@(posedge rd_clk)begin
-		if(empty)
-			valid	<= #TCO '0;
-		else if(rd_en)
-			valid	<= #TCO '1;
+	generate
+		if(FWFT == 1)
+			assign	valid	= ~empty;
 		else
-			valid	<= #TCO '0;
-	end
-	`endif
+			always_ff@(posedge rd_clk)begin
+				if(empty)
+					valid	<= #TCO '0;
+				else if(rd_en)
+					valid	<= #TCO '1;
+				else
+					valid	<= #TCO '0;
+			end
+	endgenerate
 
 
 	//=========================================================
@@ -237,15 +238,16 @@ module Async_FIFO #(
 	end
 	`endif
 
-	`ifdef	FWFT
-	assign  dout	= mem[rd_addr][((cnt_mul>>1)*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
-	`elsif	STANDARD
-	always_ff@(posedge rd_clk)begin
-		if(!empty)
-			dout	<= #TCO mem[rd_addr][((cnt_mul>>1)*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
-		else
-			dout	<= #TCO 'z;
-	end
-	`endif
+	generate
+        if(FWFT == 1)
+	        assign  dout	= mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+        else
+	        always_ff@(posedge rd_clk)begin
+		        if(!empty)
+			        dout	<= #TCO mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+		        else
+			        dout	<= #TCO 'z;
+            end
+    endgenerate
 	
 endmodule
