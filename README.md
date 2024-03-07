@@ -29,6 +29,10 @@
 * v3.1: 修改输出顺序 `2022.01.12`
    * 读写位宽不一致时，修改成高位先出。
 
+* v3.2: 修改输出顺序 `2024.02.29`
+   * 更新FWFT/STANDARD选择方式为parameter，而不是define。
+
+
 ### Wavaform：
 
 * Standard read mode:
