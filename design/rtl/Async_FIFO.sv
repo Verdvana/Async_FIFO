@@ -11,8 +11,9 @@
 // V2.1		Verdvana	Verdvana	Verdvana				2021-08-07
 // V2.2		Verdvana	Verdvana	Verdvana				2021-10-18
 // V3.0		Verdvana	Verdvana	Verdvana				2022-01-04
-// V3.1		Verdvana	Verdvana	Verdvana				2022-01-10
-// V3.2		Verdvana	Verdvana	Verdvana				2024-02-29
+// V3.1		Verdvana	Verdvana	Verdvana				2022-01-12
+// V3.2     Verdvana	Verdvana	Verdvana				2024-02-29
+// V4.0		Verdvana	Verdvana	Verdvana				2024-03-02
 //-----------------------------------------------------------------------------
 // Version	Modified History
 // V1.0		Asynchronous FIFO with customizable data width and fifo depth.
@@ -25,9 +26,13 @@
 //			data width;
 //			But the read data width must be 1, 1/2, 1/4, 1/8, etc. of the 
 //			write data width.
-// V3.1		Originally defaulted to FWFT read mode, after the update, 
+//			Originally defaulted to FWFT read mode, after the update, 
 //			standard read mode and FWFT read mode are optional by define.
-// V3.2		Change the selection of FWFT to parameter way instead of by define.
+// V3.1		Modify it to high bit first out when the read and write bit 
+//			widths are inconsistent.
+// V3.2     Change the selection of FWFT to parameter way instead of by define.
+// V4.0		Supports read width is n times the write width, n is an interger
+//			power of 2.
 //=============================================================================
 
 // Include
@@ -41,8 +46,8 @@ module Async_FIFO #(
 					READ_WIDTH		= 32,					// Data width
 					WRITE_DEPTH		= 8,					// FIFO depth
 					ALMOST_WR		= 2,					// Almost full asserted advance value
-					ALMOST_RD		= 2						// Almost empty asserted advance value
-
+					ALMOST_RD		= 2,					// Almost empty asserted advance value
+                    FWFT            = 0                     // FWFT enable, 0=STANDARD; 1=FWFT
 )(
 	// Clock and reset
 	input									wr_clk,			// Write clock
@@ -72,13 +77,19 @@ module Async_FIFO #(
 	//=========================================================
 	// Parameter
 	localparam		TCO			= 1.6,						// Simulate the delay of the register
-					ADDR_WIDTH	= $clog2(WRITE_DEPTH-1),	// Address width
-					MULTIPLE	= 2**($clog2(WRITE_WIDTH)-$clog2(READ_WIDTH));	// The write data width is a multiple of the read data width
+					DATA_DEPTH	= (READ_WIDTH>WRITE_WIDTH) ? WRITE_DEPTH/(READ_WIDTH/WRITE_WIDTH) : WRITE_DEPTH,
+					ADDR_WIDTH	= $clog2(DATA_DEPTH-1),	// Address width
+					DIN_WIDTH	= (READ_WIDTH>WRITE_WIDTH) ? READ_WIDTH : WRITE_WIDTH,
+					MULTIPLE	= (READ_WIDTH>WRITE_WIDTH) ? 1 : 2**($clog2(WRITE_WIDTH)-$clog2(READ_WIDTH));	// The write data width is a multiple of the read data width
 
 
 	//=========================================================
 	//Signal
-	reg 	[WRITE_WIDTH-1:0]		mem [WRITE_DEPTH];		// Memory bank
+	reg 	[DIN_WIDTH-1:0]			mem [DATA_DEPTH];		// Memory bank
+
+	logic							wren_int;
+	logic	[DIN_WIDTH-1:0]			din_int;
+	logic	[$clog2(READ_WIDTH/WRITE_WIDTH)-1:0]	cnt_din;
 
 	logic	[ADDR_WIDTH-1:0]		wr_addr;				// Write address
 	logic  	[ADDR_WIDTH-1:0]		rd_addr;				// Read address
@@ -97,7 +108,40 @@ module Async_FIFO #(
 
 	logic	[$clog2(MULTIPLE):0]	cnt_mul;				// Multiplier Counter
 
-
+	//=========================================================
+	//
+	generate
+	if(READ_WIDTH > WRITE_WIDTH)begin
+		always_ff@(posedge wr_clk, negedge rst_n)begin
+			if(!rst_n)
+				cnt_din	<= #TCO '0;
+			else if(wr_en && (~full))
+				cnt_din	<= #TCO cnt_din + 1'b1;
+			else if(full)
+				cnt_din	<= #TCO '0;
+		end
+		always_ff@(posedge wr_clk, negedge rst_n)begin
+			if(!rst_n)
+				wren_int	<= #TCO '0;
+			else if((&cnt_din) && (~full))
+				wren_int	<= #TCO 1'b1;
+			else
+				wren_int	<= #TCO 1'b0;
+		end
+		always_ff@(posedge wr_clk, negedge rst_n)begin
+			if(!rst_n)
+				din_int	<= #TCO '0;
+			else if(wr_en && (~full))
+				din_int	<= #TCO {din_int[DIN_WIDTH-1-WRITE_WIDTH:0],din};
+			else if(full)
+				din_int	<= #TCO '0;
+		end
+	end
+	else begin
+		assign	wren_int	= wr_en;
+		assign	din_int		= din;
+	end
+	endgenerate
 	//=========================================================
 	// Status
 	assign 	full			= wr_ptr_gray == (rd_ptr_gray_ff[1] ^ {2'b11,{(ADDR_WIDTH-1){1'b0}}});
@@ -115,7 +159,7 @@ module Async_FIFO #(
 	assign	wr_count 		= wr_ptr - rd_ptr_bin;
 	assign	rd_count 		= wr_ptr_bin - rd_ptr;
 
-	assign	almost_full		= wr_count >= (WRITE_DEPTH - ALMOST_WR); 
+	assign	almost_full		= wr_count >= (DATA_DEPTH - ALMOST_WR); 
 	assign	almost_empty	= rd_count <  (ALMOST_RD + 1);
 
 	always_ff@(posedge wr_clk, negedge rst_n)begin
@@ -123,7 +167,7 @@ module Async_FIFO #(
 			wr_ack	<= #TCO '0;
 		end
 		else if(!wr_mask)begin
-			wr_ack 	<= #TCO wr_en;
+			wr_ack 	<= #TCO wren_int;
 		end
 		else begin
 			wr_ack	<= #TCO '0;
@@ -147,7 +191,7 @@ module Async_FIFO #(
 
 	//=========================================================
 	// Write side
-	assign	wr_mask	= ~ (wr_en & (~full));
+	assign	wr_mask	= ~ (wren_int & (~full));
 
 	always_ff@(posedge wr_clk, negedge rst_n)begin
 		if(!rst_n)begin
@@ -223,31 +267,32 @@ module Async_FIFO #(
 	`ifdef FPGA_EMU
 	always_ff@(posedge wr_clk)begin
 		if(!wr_mask)
-			mem[wr_addr] <= #TCO din;
+			mem[wr_addr] <= #TCO din_int;
 	end
 	`else
     always_ff@(posedge wr_clk, negedge rst_n)begin
 		if(!rst_n)begin
-			for(int i=0;i<WRITE_DEPTH;i++)begin
+			for(int i=0;i<DATA_DEPTH;i++)begin
 				mem[i]	<= #TCO '0;
 			end
 		end
 		else if(!wr_mask) begin
-			mem[wr_addr]	<= #TCO din;
+			mem[wr_addr]	<= #TCO din_int;
 		end
 	end
 	`endif
 
 	generate
         if(FWFT == 1)
-	        assign  dout	= mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+			assign  dout	= mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
         else
-	        always_ff@(posedge rd_clk)begin
-		        if(!empty)
-			        dout	<= #TCO mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
-		        else
-			        dout	<= #TCO 'z;
+			always_ff@(posedge rd_clk)begin
+				if(!empty)
+					dout	<= #TCO mem[rd_addr][((MULTIPLE-1-(cnt_mul>>1))*READ_WIDTH+READ_WIDTH-1)-:READ_WIDTH];
+				else
+					dout	<= #TCO 'z;
             end
+
     endgenerate
 	
 endmodule
